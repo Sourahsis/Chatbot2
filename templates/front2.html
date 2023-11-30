@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #f0f0f0;
+    }
+
+    .animated-button {
+      display: inline-block;
+      padding: 10px 20px;
+      font-size: 18px;
+      text-align: center;
+      text-decoration: none;
+      cursor: pointer;
+      border: 2px solid #3498db;
+      border-radius: 5px;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      position: relative;
+      color: #3498db;
+    }
+
+    .animated-button:after {
+      content: "";
+      background: #3498db;
+      display: block;
+      position: absolute;
+      padding-top: 300%;
+      padding-left: 300%;
+      margin-left: -200%;
+      margin-top: -200%;
+      opacity: 0;
+      transition: all 0.8s
+    }
+
+    .animated-button:hover:after {
+      opacity: 1;
+      margin-left: 0;
+      margin-top: 0;
+    }
+  </style>
+</head>
+<body>
+
+  <a href="another-page.html" class="animated-button">Click me!</a>
+
+</body>
+</html>

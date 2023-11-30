@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chatbot</title>
+</head>
+<body>
+    <div id="chat-container">
+        <div id="chat-log"></div>
+        <input type="text" id="user-message" placeholder="Type a message...">
+        <button id="send-button">Send</button>
+    </div>
+
+    <script>
+        const chatLog = document.getElementById('chat-log');
+        const userMessageInput = document.getElementById('user-message');
+        const sendButton = document.getElementById('send-button');
+
+        sendButton.addEventListener('click', () => {
+            const userMessage = userMessageInput.value;
+            if (userMessage) {
+                appendMessage('You', userMessage);
+                userMessageInput.value = '';
+
+                // Send the user message to the server
+                fetch('/ask', {
+                    method: 'POST',
+                    body: new URLSearchParams({ 'user_message': userMessage }),
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        appendMessage('healthbot', data.response);
+                    })
+                    .then(data => {
+                        appendMessage('healthbot', "hello , i am your healthbot");
+                    })
+                    .catch(error => console.error('Error:', error));
+            }
+        });
+        
+
+        function appendMessage(sender, message) {
+            chatLog.innerHTML += `<p><strong>${sender}:</strong> ${message}</p>`;
+        }
+    </script>
+</body>
+</html>

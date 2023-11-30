@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Voice Assistant</title>
+</head>
+<body>
+    <h1>Voice Assistant</h1>
+    <div id="chat-container">
+        <div id="chat-log"></div>
+        <button id="speak-button">Speak</button>
+    </div>
+
+    <script>
+        const chatLog = document.getElementById('chat-log');
+        const speakButton = document.getElementById('speak-button');
+
+        // Initialize the speech recognition and synthesis objects
+        const recognition = new webkitSpeechRecognition();
+        const synthesis = window.speechSynthesis;
+
+        recognition.onresult = function (event) {
+            const result = event.results[0][0].transcript;
+            appendMessage('You', result);
+
+            // Send the voice input to the server
+            fetch('/process_voice', {
+                method: 'POST',
+                body: new URLSearchParams({ 'user_message': result }),
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+            })
+                .then(response => response.json())
+                .then(data => {
+                    appendMessage('Bot', data.response);
+                    speak(data.response);
+                })
+                .catch(error => console.error('Error:', error));
+        };
+
+        speakButton.addEventListener('click', () => {
+            recognition.start();
+        });
+
+        function appendMessage(sender, message) {
+            chatLog.innerHTML += `<p><strong>${sender}:</strong> ${message}</p>`;
+        }
+
+        function speak(message) {
+            const utterance = new SpeechSynthesisUtterance(message);
+            synthesis.speak(utterance);
+        }
+    </script>
+</body>
+</html>
+

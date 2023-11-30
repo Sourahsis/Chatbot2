@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chatbot</title>
+    <style>body, h1, p {
+        margin: 0;
+        padding: 0;
+    }
+    
+    /* Style the chat container */
+    #chat-container {
+        width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    }
+    
+    /* Style the chat log */
+    #chat-log {
+        max-height: 300px;
+        overflow-y: auto;
+        border: 1px solid #ddd;
+        padding: 10px;
+        border-radius: 5px;
+        margin-bottom: 10px;
+    }
+    
+    /* Style the user message input */
+    #user-message {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        margin-bottom: 10px;
+    }
+    
+    /* Style the send button */
+    #send-button {
+        display: block;
+        width: 100%;
+        padding: 10px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    
+    /* Style chat message bubbles */
+    p {
+        margin: 0;
+        padding: 5px;
+        background-color: #f0f0f0;
+        border-radius: 5px;
+        margin-bottom: 10px;
+    }
+    
+    /* Style the user's message differently */
+    p strong {
+        color: #007bff;
+    }</style>
+</head>
+<body>
+   
+    <div id="chat-container">
+        <div id="chat-log"></div>
+        <input type="text" id="user-message" placeholder="Type a message...">
+        <button id="send-button">Send</button>
+    </div>
+
+    <script>
+        const chatLog = document.getElementById('chat-log');
+        const userMessageInput = document.getElementById('user-message');
+        const sendButton = document.getElementById('send-button');
+
+        sendButton.addEventListener('click', () => {
+            const userMessage = userMessageInput.value;
+            if (userMessage) {
+                appendMessage('You', userMessage);
+                userMessageInput.value = '';
+                // Send the user message to the server
+                fetch('/ask', {
+                    method: 'POST',
+                    body: new URLSearchParams({ 'user_message': userMessage }),
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        appendMessage('healthbot', data.response);
+                    })
+                    .then(data => {
+                        appendMessage('healthbot', "hello , i am your healthbot, how can i help you?");
+                    })
+                    .catch(error => console.error('Error:', error));
+            }
+        });
+        
+
+        function appendMessage(sender, message) {
+            chatLog.innerHTML += `<p><strong>${sender}:</strong> ${message}</p>`;
+        }
+    </script>
+</body>
+</html>
