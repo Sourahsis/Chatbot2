@@ -1,10 +1,84 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Voice Assistant</title>
+    <title>voice Assistant</title>
+    <style>
+        * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #333; /* Dark background color */
+    font-family: Arial, sans-serif;
+    color: #fff; /* Text color */
+    text-align: center;
+}
+
+h1 {
+    font-size: 36px;
+    color: #007bff; /* Jarvis-style blue color */
+    margin-top: 20px;
+}
+
+/* Basic styling for the chat container */
+#chat-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent dark background */
+    border: 1px solid #007bff; /* Jarvis-style blue border */
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    margin-top: 20px;
+}
+
+/* Styling for chat log */
+#chat-log {
+    max-height: 400px;
+    overflow-y: auto;
+    padding: 10px;
+    border: 1px solid #007bff; /* Jarvis-style blue border */
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent dark background */
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+/* Styling for the speak button */
+#speak-button {
+    background-color: #007bff; /* Jarvis-style blue color */
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#speak-button:hover {
+    background-color: #0056b3; /* Slightly darker blue on hover */
+}
+
+/* Styling for chat messages */
+p {
+    margin: 10px 0;
+}
+
+/* Styling for user's messages */
+p strong:first-child {
+    color: #007bff; /* Jarvis-style blue color */
+}
+
+/* Styling for the medical assistant's messages */
+p strong:last-child {
+    color: #17a2b8; /* Another shade of blue for the assistant */
+}
+    </style>
+  
 </head>
 <body>
-    <h1>Voice Assistant</h1>
+    <h1>voice Assistant</h1>
     <div id="chat-container">
         <div id="chat-log"></div>
         <button id="speak-button">Speak</button>
@@ -32,7 +106,7 @@
             })
                 .then(response => response.json())
                 .then(data => {
-                    appendMessage('Bot', data.response);
+                    appendMessage('voice assistant', data.response);
                     speak(data.response);
                 })
                 .catch(error => console.error('Error:', error));

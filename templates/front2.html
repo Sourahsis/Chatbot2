@@ -1,56 +1,80 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <style>
-    body {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      margin: 0;
-      background-color: #f0f0f0;
-    }
-
+<!-- Created By CodingNepal - www.codingnepalweb.com -->
+<style>
     .animated-button {
-      display: inline-block;
-      padding: 10px 20px;
-      font-size: 18px;
-      text-align: center;
-      text-decoration: none;
-      cursor: pointer;
-      border: 2px solid #3498db;
-      border-radius: 5px;
-      overflow: hidden;
-      transition: all 0.3s ease;
-      position: relative;
-      color: #3498db;
-    }
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 18px;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  border: 2px solid white;
+  border-radius: 5px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  position: relative;
+  color: white;
+}
 
-    .animated-button:after {
-      content: "";
-      background: #3498db;
-      display: block;
-      position: absolute;
-      padding-top: 300%;
-      padding-left: 300%;
-      margin-left: -200%;
-      margin-top: -200%;
-      opacity: 0;
-      transition: all 0.8s
-    }
+.animated-button:after {
+  content: "";
+  background: blue;
+  display: block;
+  position: absolute;
+  padding-top: 300%;
+  padding-left: 300%;
+  margin-left: -200%;
+  margin-top: -200%;
+  opacity: 0;
+  transition: all 0.8s
+}
 
-    .animated-button:hover:after {
-      opacity: 1;
-      margin-left: 0;
-      margin-top: 0;
-    }
-  </style>
-</head>
+.animated-button:hover:after {
+  opacity: 1;
+  margin-left: 0;
+  margin-top: 0;
+}
+#background-video {
+   position: fixed;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100%;
+   object-fit: cover;
+   z-index: -1; /* To place it behind other content */
+}
+</style>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Website Layout | CodingLab</title> 
+    <link rel="stylesheet" href="static/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"/>
+   </head>
 <body>
-
-  <a href="another-page.html" class="animated-button">Click me!</a>
-
+  <video id="background-video" autoplay loop muted>
+    <source src="static/images/Falling Sparks from Above Free Yellow Background Videos, No Copyright _ All Background Video.mp4" type="video/mp4">
+    <!-- Add additional source elements for different video formats (e.g., WebM, Ogg) as needed. -->
+ </video>
+  <nav>
+    <div class="menu">
+      <div class="logo">
+        <a href="#">Rahu</a>
+      </div>
+      <ul>
+        <li><a href="#">Home</a></li>
+      </ul>
+    </div>
+  </nav>
+  <div class="img"></div>
+  <div class="center">
+    <div class="title">Welcome to this website</div>
+    <div class="sub_title">Chat with our bot !</div>
+    <div class="btns">
+       <a href="/home" class="animated-button">chatbot</a>
+       <a href="/voice" class="animated-button">voice assistant</a>
+    </div>
+  </div>
 </body>
 </html>
